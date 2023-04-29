@@ -1,0 +1,1 @@
+When multiple entities collaborate on the same Git project, conflicts may arise, which necessitate manual intervention to determine how to merge the different changes. Otherwise, merging and rebasing are both options for bringing together nonconflicting changes. See [here](https://github.com/webprogramming260/.github/blob/main/profile/essentials/gitHub/gitHub.md).
