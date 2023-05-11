@@ -1,3 +1,7 @@
+# Notes
+
+## Technologies
+
 When multiple entities collaborate on the same Git project, conflicts may arise, which necessitate manual intervention to determine how to merge the different changes. Otherwise, merging and rebasing are both options for bringing together nonconflicting changes.
 See [here](https://github.com/webprogramming260/.github/blob/main/profile/essentials/gitHub/gitHub.md).
 
@@ -9,3 +13,7 @@ See [here](https://github.com/webprogramming260/.github/blob/main/profile/webSer
 
 Caddy provides a nice service that handles web certificates and direction of traffic to the site accessing either static or dynamic content.
 See [here](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+
+## HTML
+
+HTML elements allow one to structure a document in a way that makes sense both to humans and to machines. See [here](https://github.com/webprogramming260/.github/blob/main/profile/html/structure/structure.md).
