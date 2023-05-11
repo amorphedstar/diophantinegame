@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diophantine Game</title>
+  </head>
+  <body>
+    <header>
+      <h1>Diophantine Game</h1>
+
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lobby.html">Lobby</a></li>
+          <li><a href="play.html">Play</a></li>
+          <li><a href="scores.html">Scores</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <hr />
+    </header>
+
+    <main>
+      <div class="players">
+        Player:
+        <span class="player-name">Player name</span>
+      </div>
+      <form action="play.html">
+        <li>
+          <fieldset>
+            <legend>Create or join a game</legend>
+            <label for="radio1">New game</label>
+            <input
+              type="radio"
+              id="radio1"
+              name="varRadio"
+              value="New game"
+              checked
+            />
+            <label for="radio2">Tim</label>
+            <input type="radio" id="radio2" name="varRadio" value="Tim" />
+            <label for="radio3">Ada</label>
+            <input type="radio" id="radio3" name="varRadio" value="Ada" />
+          </fieldset>
+        </li>
+        <button type="submit">Join</button>
+      </form>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Thomas Draper</span>
+      <br />
+      <a href="https://github.com/amorphedstar/diophantinegame">GitHub</a>
+    </footer>
+  </body>
+</html>
