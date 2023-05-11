@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diophantine Game</title>
+  </head>
+  <body>
+    <header>
+      <h1>Diophantine Game</h1>
+
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lobby.html">Lobby</a></li>
+          <li><a href="play.html">Play</a></li>
+          <li><a href="scores.html">Scores</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <hr />
+    </header>
+
+    <main>
+      <div class="players">
+        Player:
+        <span class="player-name">Player name</span>
+      </div>
+      <div class="players">
+        Opponent:
+        <span class="player-name">Opponent name</span>
+      </div>
+
+      <!-- More formatting with old style HTML -->
+      <br />
+
+      <h2>Goal: prevent a solution to</h2>
+
+      <p>--display of dynamically simplified equation--</p>
+
+      <img src="example_equation.png" width="400px" />
+
+      <br />
+
+      <div>
+        Your turn!
+        <form method="post" action="play.html">
+          <li>
+            <label for="assignment">a1 = </label>
+            <input type="text" id="assignment" placeholder="Type an integer" />
+          </li>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Thomas Draper</span>
+      <br />
+      <a href="https://github.com/amorphedstar/diophantinegame">GitHub</a>
+    </footer>
+  </body>
+</html>
