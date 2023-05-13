@@ -16,4 +16,8 @@ See [here](https://github.com/webprogramming260/.github/blob/main/profile/webSer
 
 ## HTML
 
-HTML elements allow one to structure a document in a way that makes sense both to humans and to machines. See [here](https://github.com/webprogramming260/.github/blob/main/profile/html/structure/structure.md).
+HyperText Markup Language elements allow one to structure a document in a way that makes sense both to humans and to machines. See [here](https://github.com/webprogramming260/.github/blob/main/profile/html/structure/structure.md).
+
+## CSS
+
+Cascading Style Sheets provide a language to style the appearance of a structured website by selecting certain elements or classes of elements and defining how they will be displayed or even animated. See [here](https://github.com/webprogramming260/.github/blob/main/profile/css/introduction/introduction.md).
