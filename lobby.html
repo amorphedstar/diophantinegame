@@ -6,6 +6,7 @@
     <title>Diophantine Game</title>
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="game.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -39,32 +40,36 @@
       </nav>
     </header>
 
-    <main class="container-fluid bg-secondary text-center">
-      <div>
-        <div class="players">
+    <main class="bg-secondary">
+      <div class="players">
+        <p>
           Player:
           <span class="player-name">Player name</span>
-        </div>
-        <form action="play.html">
+          <div id="player-messages">
+          </div>
+        </p>
+      </div>
+      <div class="game">
+        <form action="play.html" class="form">
+          <legend>Create or join a game</legend>
           <fieldset>
-            <legend>Create or join a game</legend>
             <div class="form-check">
-              <input
+              <input class="form-check-input"
                 type="radio"
                 id="radio1"
                 name="varRadio"
                 value="New game"
                 checked
               />
-              <label for="radio1">New game</label>
+              <label class="form-check-label" for="radio1">New game</label>
             </div>
             <div class="form-check">
-              <input type="radio" id="radio2" name="varRadio" value="Tim" />
-              <label for="radio2">Tim</label>
+              <input class="form-check-input" type="radio" id="radio2" name="varRadio" value="Tim" />
+              <label class="form-check-label" for="radio2">Tim</label>
             </div>
             <div class="form-check">
-              <input type="radio" id="radio3" name="varRadio" value="Ada" />
-              <label for="radio3">Ada</label>
+              <input class="form-check-input" type="radio" id="radio3" name="varRadio" value="Ada" />
+              <label class="form-check-label" for="radio3">Ada</label>
             </div>
           </fieldset>
           <button type="submit" class="btn btn-primary">Go!</button>

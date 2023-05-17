@@ -6,6 +6,7 @@
     <title>Diophantine Game</title>
 
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="game.css" />
 
     <!-- Include bootstrap CSS framework -->
     <link
@@ -14,6 +15,14 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+
+    <!-- Include MathJax rendering framework -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
   </head>
   <body class="bg-dark text-light">
     <header class="container-fluid">
@@ -39,36 +48,54 @@
       </nav>
     </header>
 
-    <main>
+    <main class="bg-secondary">
       <div class="players">
-        Player:
-        <span class="player-name">Player name</span>
+        <p>
+          Player:
+          <span class="player-name">Player name</span>
+        </p>
+        <p>
+          Opponent:
+          <span class="player-name">Opponent name</span>
+        </p>
+        <div id="player-messages">
+          <div class="event">
+            <span class="player-event">Opponent name</span> selected \( x_1 = 100 \)
+          </div>
+        </div>
       </div>
-      <div class="players">
-        Opponent:
-        <span class="player-name">Opponent name</span>
-      </div>
 
-      <!-- More formatting with old style HTML -->
-      <br />
+      <div class="game">
+        <h2>Goal: prevent a solution to</h2>
+        <!-- 
+        \begin{align*}
+        \bigg\{ \{a_1 + a_6 + 1 - x_4 \}^2 \bigg\{ \big\langle (a_6 + a_7)^2 + &3a_7 + a_6 - 2x_4 \big\rangle^2 \\
+          + \bigg\langle [ (x_9 - a_7)^2 + (x_{10} - a_9)^2 ] [ (&x_9 - a_6)^2 + (x_{10} - a_8)^2 ( (x_4 - a_1)^2 + (x_{10} - a_9 - x_1)^2 ) ] \\
+          \times [ (x_9 - 3x_4)^2 + (x_{10} - a_8 - &a_9)^2 ] [ (x_9 - 3x_4 - 1)^2 + (x_{10} - a_8 a_9)^2 ] - a_{12} - 1 \bigg\rangle^2 \\
+          + \langle [ x_{10} + a_{12} + a_{12} x_9 a_4 - a_3 ]^2 &+ [ x_5 + a_{13} - x_9 a_4 ]^2 \rangle \bigg\} - x_{13} - 1 \bigg\} \{ a_1 + x_5 + 1 - a_5 \} \\
+          \times \bigg\{ \langle ( &x_5 - x_6)^2 + 3x_6 + x_5 - 2a_5 \rangle^2 \\
+          + \bigg\langle [ ( a_{10} - x_6 )^2 + (a_{11} - x_8)^2 ] [ (&a_{10} - x_5)^2 + (a_{11} - x_7)^2 ( (a_5 - a_1)^2 + (a_{11} - x_8 - a_2)^2 ) ] \\
+          \times [ (a_{10} - 3a_5)^2 + (a_{11} - x_7 - &x_8)^2] [ (a_{10} - 3a_5 - 1)^2 + (a_{11} - x_7 x_8)^2 ] - x_{11} - 1 \bigg\rangle^2 \\
+          + \langle &[ a_{11} + x_{11} + x_{11} a_{10} x_3 - x_2 ]^2 + [a_{11} + x_{12} - a_{10} x_3 ]^2 \rangle \bigg\} = 0        \end{align*}
+          -->
+        \(  \{a_1 + a_2 + 1 - x_2 \}^2  \big\langle (a_1 + a_3)^2
+        + 3x_1 + a_2 - 2x_3 \big\rangle^2 = 0 \)
 
-      <h2>Goal: prevent a solution to</h2>
+        <br />
 
-      <p>--display of dynamically simplified equation--</p>
-
-      <img src="example_equation.png" width="400px" />
-
-      <br />
-
-      <div>
-        Your turn!
-        <form method="post" action="play.html">
-          <li>
-            <label for="assignment">a1 = </label>
-            <input type="text" id="assignment" placeholder="Type an integer" />
-          </li>
-          <button type="submit">Submit</button>
-        </form>
+        <div>
+          <form method="post" action="play.html" class="form">
+            <div style="margin: 20px;">
+              <label for="assignment">\(a_1 = \)</label>
+              <input
+                type="text"
+                id="assignment"
+                placeholder="Type an integer"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     </main>
 
