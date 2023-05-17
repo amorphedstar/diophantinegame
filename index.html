@@ -39,24 +39,26 @@
       </nav>
     </header>
 
-    <main>
-      <h1>Welcome</h1>
-      <p>Login to play</p>
-      <form method="get" action="lobby.html">
-        <li>
-          <label for="name">Name: </label>
-          <input type="text" id="name" placeholder="Your name here" />
-        </li>
-        <li>
-          <label for="password">Password: </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Your password here"
-          />
-        </li>
-        <button type="submit">Login</button>
-      </form>
+    <main class="container-fluid bg-secondary text-center">
+      <div>
+        <h1>Welcome</h1>
+        <p>Login to play</p>
+        <form method="get" action="lobby.html">
+          <li>
+            <label for="name">Name: </label>
+            <input type="text" id="name" placeholder="Your name here" />
+          </li>
+          <li>
+            <label for="password">Password: </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Your password here"
+            />
+          </li>
+          <button type="submit" class="btn btn-primary">Login/Register</button>
+        </form>
+      </div>
     </main>
 
     <footer class="bg-dark text-dark text-muted">
