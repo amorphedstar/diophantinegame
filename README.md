@@ -50,3 +50,14 @@ For this deliverable I added the application structure.
 - **Login** - Input box and submit button for login.
 - **Database** - The scores represent data pulled from the database.
 - **WebSocket** - The current equation state is determined in real time from the websocket.
+
+## CSS deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
+- **Header, footer, and main content body**
+- **Navigation elements** - I dropped the underlines and changed the color for anchor elements.
+- **Responsive to window resizing** - My app looks great on most window sizes and devices, and the header and footer disappear if the window is too short
+- **Application elements** - Used good contrast and whitespace
+- **Application text content** - Consistent fonts
+- **Application images** - Styled a bit around the historical paper screenshot
