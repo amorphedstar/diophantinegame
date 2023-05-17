@@ -41,6 +41,11 @@ footer a {
   float: right;
 }
 
+.form > * {
+  display: block;
+  margin-bottom: 4px;
+}
+
 @media (max-height: 600px) {
   header {
     display: none;
