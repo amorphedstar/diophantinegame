@@ -40,30 +40,36 @@
     </header>
 
     <main class="container-fluid bg-secondary text-center">
-      <div class="players">
-        Player:
-        <span class="player-name">Player name</span>
-      </div>
-      <form action="play.html">
-        <li>
+      <div>
+        <div class="players">
+          Player:
+          <span class="player-name">Player name</span>
+        </div>
+        <form action="play.html">
           <fieldset>
             <legend>Create or join a game</legend>
-            <label for="radio1">New game</label>
-            <input
-              type="radio"
-              id="radio1"
-              name="varRadio"
-              value="New game"
-              checked
-            />
-            <label for="radio2">Tim</label>
-            <input type="radio" id="radio2" name="varRadio" value="Tim" />
-            <label for="radio3">Ada</label>
-            <input type="radio" id="radio3" name="varRadio" value="Ada" />
+            <div class="form-check">
+              <input
+                type="radio"
+                id="radio1"
+                name="varRadio"
+                value="New game"
+                checked
+              />
+              <label for="radio1">New game</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" id="radio2" name="varRadio" value="Tim" />
+              <label for="radio2">Tim</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" id="radio3" name="varRadio" value="Ada" />
+              <label for="radio3">Ada</label>
+            </div>
           </fieldset>
-        </li>
-        <button type="submit" class="btn btn-primary">Join</button>
-      </form>
+          <button type="submit" class="btn btn-primary">Go!</button>
+        </form>
+      </div>
     </main>
 
     <footer class="bg-dark text-dark text-muted">
