@@ -22,6 +22,10 @@ HyperText Markup Language elements allow one to structure a document in a way th
 
 Cascading Style Sheets provide a language to style the appearance of a structured website by selecting certain elements or classes of elements and defining how they will be displayed or even animated. See [here](https://github.com/webprogramming260/.github/blob/main/profile/css/introduction/introduction.md).
 
+## JavaScript
+
+JavaScript is the programming language used in browsers to make websites interacitve, but its use has now expanded and it is also popular for backend development. See [here](https://github.com/webprogramming260/.github/blob/main/profile/javascript/introduction/introduction.md).
+
 <details>
   <summary>Foldable Instruction Topics</summary>
 
