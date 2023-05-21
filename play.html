@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="game.css" />
 
-    <!-- Include bootstrap CSS framework -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -60,7 +59,8 @@
         </p>
         <div id="player-messages">
           <div class="event">
-            <span class="player-event">Opponent name</span> selected \( x_1 = 100 \)
+            <span class="player-event">Opponent name</span> selected \( x_1 =
+            100 \)
           </div>
         </div>
       </div>
@@ -78,14 +78,14 @@
           \times [ (a_{10} - 3a_5)^2 + (a_{11} - x_7 - &x_8)^2] [ (a_{10} - 3a_5 - 1)^2 + (a_{11} - x_7 x_8)^2 ] - x_{11} - 1 \bigg\rangle^2 \\
           + \langle &[ a_{11} + x_{11} + x_{11} a_{10} x_3 - x_2 ]^2 + [a_{11} + x_{12} - a_{10} x_3 ]^2 \rangle \bigg\} = 0        \end{align*}
           -->
-        \(  \{a_1 + a_2 + 1 - x_2 \}^2  \big\langle (a_1 + a_3)^2
-        + 3x_1 + a_2 - 2x_3 \big\rangle^2 = 0 \)
+        \( \{a_1 + a_2 + 1 - x_2 \}^2 \big\langle (a_1 + a_3)^2 + 3x_1 + a_2 -
+        2x_3 \big\rangle^2 = 0 \)
 
         <br />
 
         <div>
           <form method="post" action="play.html" class="form">
-            <div style="margin: 20px;">
+            <div style="margin: 20px">
               <label for="assignment">\(a_1 = \)</label>
               <input
                 type="text"
@@ -109,5 +109,8 @@
         >
       </div>
     </footer>
+
+    <!-- Script is located at the bottom because it references HTML elements during initialization -->
+    <script src="play.js"></script>
   </body>
 </html>
