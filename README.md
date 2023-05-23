@@ -6,6 +6,16 @@
 
 Have you ever found yourself reading about mathematical game theory, and wondering whether any implementation actually exists where you can play the game described? Maybe you were researching Hilbert's tenth problem and found an intriguing Diophantine game in which one of the players has a winning strategy which is not computable. Well, your search has now come to an end, since this convenient web app allows you to play this Diophantine game (and infinitely many more) conveniently online with your friends, with no need for tedious big integer calculations by hand! Two users join a game and alternately pick values for variables, with one player trying to make the final expression equal zero and the other trying to make it nonzero. If you just follow an algorithm, you can't have an optimal strategy, so if you can win every match you must be better than a computer ever could be!
 
+$$\begin{align*}
+\bigg\{ \{a_1 + a_6 + 1 - x_4 \}^2 \bigg\{ \big\langle (a_6 + a_7)^2 + &3a_7 + a_6 - 2x_4 \big\rangle^2 \\
+  + \bigg\langle [ (x_9 - a_7)^2 + (x_{10} - a_9)^2 ] [ (&x_9 - a_6)^2 + (x_{10} - a_8)^2 ( (x_4 - a_1)^2 + (x_{10} - a_9 - x_1)^2 ) ] \\
+  \times [ (x_9 - 3x_4)^2 + (x_{10} - a_8 - &a_9)^2 ] [ (x_9 - 3x_4 - 1)^2 + (x_{10} - a_8 a_9)^2 ] - a_{12} - 1 \bigg\rangle^2 \\
+  + \langle [ x_{10} + a_{12} + a_{12} x_9 a_4 - a_3 ]^2 &+ [ x_5 + a_{13} - x_9 a_4 ]^2 \rangle \bigg\} - x_{13} - 1 \bigg\} \{ a_1 + x_5 + 1 - a_5 \} \\
+  \times \bigg\{ \langle ( &x_5 - x_6)^2 + 3x_6 + x_5 - 2a_5 \rangle^2 \\
+  + \bigg\langle [ ( a_{10} - x_6 )^2 + (a_{11} - x_8)^2 ] [ (&a_{10} - x_5)^2 + (a_{11} - x_7)^2 ( (a_5 - a_1)^2 + (a_{11} - x_8 - a_2)^2 ) ] \\
+  \times [ (a_{10} - 3a_5)^2 + (a_{11} - x_7 - &x_8)^2] [ (a_{10} - 3a_5 - 1)^2 + (a_{11} - x_7 x_8)^2 ] - x_{11} - 1 \bigg\rangle^2 \\
+  + \langle &[ a_{11} + x_{11} + x_{11} a_{10} x_3 - x_2 ]^2 + [a_{11} + x_{12} - a_{10} x_3 ]^2 \rangle \bigg\} = 0        \end{align*}$$
+
 ### Design
 
 ![Mock](diophantine_game_mockup.png)
