@@ -24,3 +24,7 @@
 .game {
   position: absolute;
 }
+
+.assignment-container {
+  margin: 20px;
+}

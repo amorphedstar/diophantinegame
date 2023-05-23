@@ -20,23 +20,20 @@ function toTeX(expr) {
 
 function prettify(expr) {
   const parentheses = [["\\{", "\\}"], ["\\langle ", "\\rangle "], "[]", "()"];
+  const sizes = ["\\Bigg", "\\bigg", "\\Big", "\\big"];
   let depth = 0;
   const chars = [];
   for (const char of toTeX(expr).replaceAll(/\+-/g, "-")) {
     if (char === "(") {
-      if (depth < 2) {
-        chars.push("\\bigg");
-      } else if (depth < 4) {
-        chars.push("\\Big");
+      if (depth < 4) {
+        chars.push(sizes[depth]);
       }
       chars.push(parentheses[depth % parentheses.length][0]);
       depth++;
     } else if (char === ")") {
       depth--;
-      if (depth < 2) {
-        chars.push("\\bigg");
-      } else if (depth < 4) {
-        chars.push("\\Big");
+      if (depth < 4) {
+        chars.push(sizes[depth]);
       }
       chars.push(parentheses[depth % parentheses.length][1]);
     } else {
@@ -91,3 +88,4 @@ function initializeEquation() {
 }
 
 let equation = initializeEquation();
+
