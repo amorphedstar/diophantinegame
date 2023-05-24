@@ -71,3 +71,12 @@ For this deliverable I properly styled the application into its final appearance
 - **Application elements** - Used good contrast and whitespace
 - **Application text content** - Consistent fonts
 - **Application images** - Styled a bit around the historical paper screenshot
+
+## JavaScript deliverable
+
+For this deliverable I made my application functional for the user to input variable assignments which then update the equation.
+
+- **login** - When you click the login button it stores the username takes you to the lobby page.
+- **database** - Displayed the user scores of games. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later. Also there is a list of currently open games stored and shown in the lobby.
+- **WebSocket** - I used delays to asynchronously simulate the opponent's moves. This will be replaced with WebSocket messages later.
+- **application logic** - The equation dynamically updates and simplifies based on the user's and opponent's selections.

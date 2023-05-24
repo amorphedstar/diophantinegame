@@ -181,7 +181,8 @@ class Game {
 
     const id = `log${this.turnNumber}`;
     chatText.innerHTML =
-      `<div class="event"><span class="player-event">${player}</span> set <span id="${id}"><span id="${id}Output">$$${symbol}=${value}$$</span></span></div>` +
+      // `<div class="event"><span class="player-event">${player}</span> set <span id="${id}"><span id="${id}Output">$$${symbol}=${value}$$</span></span></div>` +
+      `<div class="event"><span class="player-event">${player}</span> set <span id="${id}"><span id="${id}Output">${symbol}=${value}</span></span></div>` +
       chatText.innerHTML;
 
     // document.getElementById("eqn").innerHTML = equation;
