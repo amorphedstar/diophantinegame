@@ -212,7 +212,7 @@ class Game {
     this.submitButton.onclick = () => {
       const textEl = document.getElementById("assignment-text");
       const text = textEl.value;
-      if (!/^-?\d+$/.test(text)) {
+      if (!/^\d+$/.test(text)) {
         alert(`Not an integer!: ${text}`);
       } else {
         this.assignValue(
