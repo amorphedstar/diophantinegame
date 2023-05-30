@@ -26,6 +26,10 @@ Cascading Style Sheets provide a language to style the appearance of a structure
 
 JavaScript is the programming language used in browsers to make websites interacitve, but its use has now expanded and it is also popular for backend development. See [here](https://github.com/webprogramming260/.github/blob/main/profile/javascript/introduction/introduction.md).
 
+## Web services
+
+Web services allow requests for more than just static content from servers. This makes interactive web applications possible. See [here](https://github.com/webprogramming260/.github/blob/main/profile/webServices/introduction/introduction.md).
+
 <details>
   <summary>Foldable Instruction Topics</summary>
 
