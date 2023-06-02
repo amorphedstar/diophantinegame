@@ -87,6 +87,6 @@ For this deliverable I created an HTTP service to host my frontend and provide b
 
 - **Node.js/Express HTTP service** - done!
 - **Static middleware for frontend** - done!
-- **Calls to third party endpoints** - I simulate waiting on the opponent now with an API call to [random.org](random.org).
+- **Calls to third party endpoints** - I simulate waiting on the opponent now with an API call to [random.org](https://www.random.org).
 - **Backend service endpoints** - Endpoints for querying and updating scores. Also, a framework for keeping track of and querying for active games.
 - **Frontend calls service endpoints** - I did this using the `fetch` function.
