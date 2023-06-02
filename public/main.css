@@ -1,7 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 375px;
 }
 
 header {
@@ -66,7 +66,7 @@ footer a {
   height: 100%;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   header {
     display: none;
   }

@@ -280,7 +280,27 @@ class Game {
     this.saveScore(wonGame);
   }
 
-  saveScore(win) {
+  async saveScore(win) {
+    const userName = this.getPlayerName();
+    const newScore = { user: userName, win };
+
+    try {
+      const response = await fetch("/api/score", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(newScore),
+      });
+
+      // Store what the service gave us as the high scores
+      const scores = await response.json();
+      localStorage.setItem("scores", JSON.stringify(scores));
+    } catch {
+      // If there was an error then just track scores locally
+      this.updateScoresLocal(win);
+    }
+  }
+
+  updateScoresLocal(win) {
     const userName = this.getPlayerName();
     const scoresText = localStorage.getItem("scores");
     const scores = scoresText ? JSON.parse(scoresText) : [];
