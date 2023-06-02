@@ -233,6 +233,11 @@ class Game {
   }
 
   async waitForJoin() {
+    await fetch("/api/game", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ game: this.getPlayerName() }),
+    });
     await delay(3000);
     const opponentName = "Eich";
     localStorage.setItem("opponentName", opponentName);

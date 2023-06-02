@@ -76,7 +76,17 @@ For this deliverable I properly styled the application into its final appearance
 
 For this deliverable I made my application functional for the user to input variable assignments which then update the equation.
 
-- **login** - When you click the login button it stores the username takes you to the lobby page.
-- **database** - Displayed the user scores of games. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later. Also there is a list of currently open games stored and shown in the lobby.
+- **Login** - When you click the login button it stores the username takes you to the lobby page.
+- **Database** - Displayed the user scores of games. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later. Also there is a list of currently open games stored and shown in the lobby.
 - **WebSocket** - I used delays to asynchronously simulate the opponent's moves. This will be replaced with WebSocket messages later.
-- **application logic** - The equation dynamically updates and simplifies based on the user's and opponent's selections.
+- **Application logic** - The equation dynamically updates and simplifies based on the user's and opponent's selections.
+
+## Service deliverable
+
+For this deliverable I created an HTTP service to host my frontend and provide backend endpoints.
+
+- **Node.js/Express HTTP service** - done!
+- **Static middleware for frontend** - done!
+- **Calls to third party endpoints** - I simulate waiting on the opponent now with an API call to [random.org](random.org).
+- **Backend service endpoints** - Endpoints for querying and updating scores. Also, a framework for keeping track of and querying for active games.
+- **Frontend calls service endpoints** - I did this using the `fetch` function.
