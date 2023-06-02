@@ -247,11 +247,12 @@ class Game {
 
   async waitForOpponent() {
     this.submitButton.disabled = true;
-    await delay(2000);
-    const value = BigInt(Math.floor(Math.random() * 1000000));
+    const value = await fetch(
+      "https://www.random.org/integers/?num=1&min=1&max=1000&col=1&base=10&format=plain&rnd=new"
+    ).then((res) => res.json());
     this.assignValue(
       this.variables[this.turnNumber],
-      value,
+      BigInt(value),
       this.getOpponentName()
     );
     this.turnNumber++;
