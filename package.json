@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/amorphedstar/diophantinegame/issues"
   },
-  "homepage": "https://github.com/amorphedstar/diophantinegame#readme"
+  "homepage": "https://github.com/amorphedstar/diophantinegame#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
