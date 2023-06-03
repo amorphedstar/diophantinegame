@@ -236,7 +236,7 @@ class Game {
     await fetch("/api/game", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ game: this.getPlayerName() }),
+      body: JSON.stringify({ name: this.getPlayerName() }),
     });
     await delay(3000);
     const opponentName = "Eich";

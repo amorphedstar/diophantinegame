@@ -5,12 +5,14 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db("startup");
 const scoreCollection = db.collection("score");
+const gameCollection = db.collection("game");
 
 // This will asynchronously test the connection and exit the process if it fails
 async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
 }
+
 testConnection().catch((ex) => {
   console.log(
     `Unable to connect to database with ${url} because ${ex.message}`
@@ -44,4 +46,20 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-module.exports = { addScore, getHighScores };
+function addGame({ name }) {
+  return gameCollection.replaceOne({ name }, { name }, { upsert: true });
+}
+
+function closeGame({ name }) {
+  return gameCollection.deleteOne({ name });
+}
+
+function getGames() {
+  const options = {
+    limit: 10,
+  };
+  const cursor = gameCollection.find({}, options);
+  return cursor.toArray();
+}
+
+module.exports = { addScore, getHighScores, addGame, closeGame, getGames };

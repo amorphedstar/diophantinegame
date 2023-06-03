@@ -40,7 +40,8 @@ apiRouter.get("/games", (_req, res) => {
   if (verbose) {
     console.log("GET /api/games");
   }
-  res.send(availableGames);
+  const games = DB.getAvailableGames();
+  res.send(games);
 });
 
 // AddGame
@@ -48,8 +49,8 @@ apiRouter.post("/game", (req, res) => {
   if (verbose) {
     console.log("POST /api/game", req.body);
   }
-  addGame(req.body.game);
-  res.send(availableGames);
+  const game = DB.addGame(req.body);
+  res.send(game);
 });
 
 // NOTE: The following endpoint is not used in the frontend yet
@@ -60,8 +61,8 @@ apiRouter.delete("/game", (req, res) => {
   if (verbose) {
     console.log("DELETE /api/game", req.body);
   }
-  closeGame(req.body.game);
-  res.send(availableGames);
+  const game = DB.closeGame(req.body);
+  res.send(game);
 });
 
 // Return the application's default page if the path is unknown
@@ -72,18 +73,3 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-const availableGames = ["Ada", "Tim"];
-
-function addGame(game) {
-  if (!availableGames.includes(game)) {
-    availableGames.push(game);
-  }
-}
-
-function closeGame(game) {
-  const index = availableGames.indexOf(game);
-  if (index !== -1) {
-    availableGames.splice(index, 1);
-  }
-}
