@@ -7,7 +7,6 @@ async function loadScores() {
 
     // Save the scores in case we go offline in the future
     localStorage.setItem("scores", JSON.stringify(scores));
-    console.log("GOT SCORES!", scores);
   } catch {
     // If there was an error then just use the last saved scores
     const scoresText = localStorage.getItem("scores");

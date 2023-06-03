@@ -46,19 +46,19 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-function addGame({ name }) {
+async function addGame({ name }) {
   return gameCollection.replaceOne({ name }, { name }, { upsert: true });
 }
 
-function closeGame({ name }) {
+async function closeGame({ name }) {
   return gameCollection.deleteOne({ name });
 }
 
-function getGames() {
+async function getGames() {
   const options = {
     limit: 10,
   };
-  const cursor = gameCollection.find({}, options);
+  const cursor = await gameCollection.find({}, options);
   return cursor.toArray();
 }
 

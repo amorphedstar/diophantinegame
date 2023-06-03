@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const DB = require('./database.js');
+const DB = require("./database.js");
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -36,20 +36,20 @@ apiRouter.post("/score", async (req, res) => {
 });
 
 // GetGames
-apiRouter.get("/games", (_req, res) => {
+apiRouter.get("/games", async (_req, res) => {
   if (verbose) {
     console.log("GET /api/games");
   }
-  const games = DB.getAvailableGames();
+  const games = await DB.getGames();
   res.send(games);
 });
 
 // AddGame
-apiRouter.post("/game", (req, res) => {
+apiRouter.post("/game", async (req, res) => {
   if (verbose) {
     console.log("POST /api/game", req.body);
   }
-  const game = DB.addGame(req.body);
+  const game = await DB.addGame(req.body);
   res.send(game);
 });
 
@@ -57,11 +57,11 @@ apiRouter.post("/game", (req, res) => {
 //       but will be used once there is functionality for
 //       connecting different users in a live game.
 // CloseGame
-apiRouter.delete("/game", (req, res) => {
+apiRouter.delete("/game", async (req, res) => {
   if (verbose) {
     console.log("DELETE /api/game", req.body);
   }
-  const game = DB.closeGame(req.body);
+  const game = await DB.closeGame(req.body);
   res.send(game);
 });
 

@@ -11,14 +11,13 @@ function beginGame() {
 fetch("/api/games")
   .then((response) => response.json())
   .then((games) => {
-    console.log(games);
     const radioGroupEl = document.querySelector("#gamelist");
     radioGroupEl.innerHTML += games
       .map(
-        (name) => `
+        ({ _id, name }) => `
 <div class="form-check">
-<input class="form-check-input" type="radio" id="${name}" name="varRadio" value="${name}" />
-<label class="form-check-label" for="${name}">${name}</label>
+<input class="form-check-input" type="radio" id="${_id}" name="varRadio" value="${name}" />
+<label class="form-check-label" for="${_id}">${name}</label>
 </div>
 `
       )

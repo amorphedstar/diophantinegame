@@ -277,8 +277,6 @@ class Game {
   }
 
   finishGame() {
-    console.log(this.equation);
-    console.log(this);
     this.updateEquation();
     const wonGame = (this.equation === 0n) ^ (this.playerNumber === 0) ? 1 : 0;
     alert(`You ${wonGame ? "win" : "lose"}!`);
