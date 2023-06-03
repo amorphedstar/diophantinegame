@@ -287,7 +287,7 @@ class Game {
 
   async saveScore(win) {
     const userName = this.getPlayerName();
-    const newScore = { user: userName, win };
+    const newScore = { name: userName, win };
 
     try {
       const response = await fetch("/api/score", {

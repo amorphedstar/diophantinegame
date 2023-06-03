@@ -22,13 +22,9 @@ async function loadScores() {
 function displayScores(scores) {
   const tableBodyEl = document.querySelector("#scores");
 
-  const sortedScores = Object.entries(scores)
-    .map(([name, score]) => ({ name, ...score }))
-    .sort((a, b) => b.wins - a.wins || a.games - b.games);
-
-  if (sortedScores.length) {
+  if (scores.length) {
     // Update the DOM with the scores
-    for (const [i, score] of sortedScores.entries()) {
+    for (const [i, score] of scores.entries()) {
       const positionTdEl = document.createElement("td");
       const nameTdEl = document.createElement("td");
       const scoreTdEl = document.createElement("td");

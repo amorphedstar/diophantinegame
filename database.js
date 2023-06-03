@@ -18,17 +18,17 @@ testConnection().catch((ex) => {
   process.exit(1);
 });
 
-async function addScore({ user, win }) {
-  const currentScore = await scoreCollection.findOne({ user });
+async function addScore({ name, win }) {
+  const currentScore = await scoreCollection.findOne({ name });
   if (currentScore) {
     const newScore = {
       wins: currentScore.wins + win,
       games: currentScore.games + 1,
     };
-    return scoreCollection.updateOne({ user }, { $set: newScore });
+    return scoreCollection.updateOne({ name }, { $set: newScore });
   } else {
     return scoreCollection.insertOne({
-      user,
+      name,
       wins: win,
       games: 1,
     });
