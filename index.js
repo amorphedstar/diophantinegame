@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const DB = require('./database.js');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -17,20 +18,21 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetScores
-apiRouter.get("/scores", (_req, res) => {
+apiRouter.get("/scores", async (_req, res) => {
   if (verbose) {
     console.log("GET /api/scores");
   }
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
 // SubmitScore
-apiRouter.post("/score", (req, res) => {
+apiRouter.post("/score", async (req, res) => {
   if (verbose) {
     console.log("POST /api/score", req.body);
   }
-  updateScores(req.body);
-  res.send(scores);
+  const score = await DB.addScore(req.body);
+  res.send(score);
 });
 
 // GetGames
@@ -70,15 +72,6 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// updateScores considers a new game result to keep track of.
-// The scores are saved in memory and disappear whenever the service is restarted.
-const scores = {};
-function updateScores({ user, win }) {
-  scores[user] ??= { wins: 0, games: 0 };
-  scores[user].wins += win;
-  scores[user].games += 1;
-}
 
 const availableGames = ["Ada", "Tim"];
 
