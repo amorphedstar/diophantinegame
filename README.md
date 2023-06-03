@@ -90,3 +90,11 @@ For this deliverable I created an HTTP service to host my frontend and provide b
 - **Calls to third party endpoints** - I simulate waiting on the opponent now with an API call to [random.org](https://www.random.org).
 - **Backend service endpoints** - Endpoints for querying and updating scores. Also, a framework for keeping track of and querying for active games.
 - **Frontend calls service endpoints** - I did this using the `fetch` function.
+
+## DB deliverable
+
+For this deliverable I stored and retrieved data from MongoDB.
+
+- **MongoDB Atlas database created** - done!
+- **Endpoints for data** - My endpoints now store data in and retrieve data from MongoDB.
+- **Stores data in MongoDB** - done!
