@@ -1,6 +1,10 @@
 // prettier-ignore
 const initialEquation = {"operator":"*","args":[{"operator":"+","args":[{"operator":"*","args":[{"operator":"^","args":[{"operator":"+","args":["a_{1}","a_{6}",1,{"operator":"*","args":["-1","x_{4}"]}]},2]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{6}","a_{7}"]},2]},{"operator":"*","args":[3,"a_{7}"]},"a_{6}",{"operator":"*","args":["-2","x_{4}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":[{"operator":"*","args":[{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{9}",{"operator":"*","args":["-1","a_{7}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{10}",{"operator":"*","args":["-1","a_{9}"]}]},2]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{9}",{"operator":"*","args":["-1","a_{6}"]}]},2]},{"operator":"*","args":[{"operator":"^","args":[{"operator":"+","args":["x_{10}",{"operator":"*","args":["-1","a_{8}"]}]},2]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{4}",{"operator":"*","args":["-1","a_{1}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{10}",{"operator":"*","args":["-1","a_{9}"]},{"operator":"*","args":["-1","x_{1}"]}]},2]}]}]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{9}",{"operator":"*","args":["-3","x_{4}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{10}",{"operator":"*","args":["-1","a_{8}"]},{"operator":"*","args":["-1","a_{9}"]}]},2]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{9}",{"operator":"*","args":["-3","x_{4}"]},"-1"]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{10}",{"operator":"*","args":["-1","a_{8}","a_{9}"]}]},2]}]}]},{"operator":"*","args":["-1","a_{12}"]},"-1"]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{10}","a_{12}",{"operator":"*","args":["a_{12}","x_{9}","a_{4}"]},{"operator":"*","args":["-1","a_{3}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["x_{5}","a_{13}",{"operator":"*","args":["-1","x_{9}","a_{4}"]}]},2]}]}]},{"operator":"*","args":["-1","x_{13}"]},"-1"]},{"operator":"+","args":["a_{1}","x_{5}",1,{"operator":"*","args":["-1","a_{5}"]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["x_{5}",{"operator":"*","args":["-1","x_{6}"]}]},2]},{"operator":"*","args":[3,"x_{6}"]},"x_{5}",{"operator":"*","args":["-2","a_{5}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":[{"operator":"*","args":[{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{10}",{"operator":"*","args":["-1","x_{6}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}",{"operator":"*","args":["-1","x_{8}"]}]},2]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{10}",{"operator":"*","args":["-1","x_{5}"]}]},2]},{"operator":"*","args":[{"operator":"^","args":[{"operator":"+","args":["a_{11}",{"operator":"*","args":["-1","x_{7}"]}]},2]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{5}",{"operator":"*","args":["-1","a_{1}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}",{"operator":"*","args":["-1","x_{8}"]},{"operator":"*","args":["-1","a_{2}"]}]},2]}]}]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{10}",{"operator":"*","args":["-3","a_{5}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}",{"operator":"*","args":["-1","x_{7}"]},{"operator":"*","args":["-1","x_{8}"]}]},2]}]},{"operator":"+","args":[{"operator":"^","args":[{"operator":"+","args":["a_{10}",{"operator":"*","args":["-3","a_{5}"]},"-1"]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}",{"operator":"*","args":["-1","x_{7}","x_{8}"]}]},2]}]}]},{"operator":"*","args":["-1","x_{11}"]},"-1"]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}","x_{11}",{"operator":"*","args":["x_{11}","a_{10}","x_{3}"]},{"operator":"*","args":["-1","x_{2}"]}]},2]},{"operator":"^","args":[{"operator":"+","args":["a_{11}","x_{12}",{"operator":"*","args":["-1","a_{10}","x_{3}"]}]},2]}]}]};
 
+// Event messages
+const GameEndEvent = "gameEnd";
+const GameStartEvent = "gameStart";
+
 // type Expression = bigint | string | { operator: String, args: Expression[] };
 
 // debugging
@@ -140,6 +144,7 @@ class Game {
   turnNumber;
   equation;
   submitButton;
+  socket;
 
   constructor() {
     this.variables = [...Array(26)].map(
@@ -166,6 +171,8 @@ class Game {
       goalTextEl.textContent = "Goal: prevent a solution to";
       this.waitForJoin();
     }
+
+    this.configureWebSocket();
   }
 
   updateEquation() {
@@ -294,6 +301,9 @@ class Game {
         body: JSON.stringify(newScore),
       });
 
+      // Let other players know the game has concluded
+      this.broadcastEvent(userName, GameEndEvent, newScore);
+
       // Store what the service gave us as the high scores
       const scores = await response.json();
       localStorage.setItem("scores", JSON.stringify(scores));
@@ -323,6 +333,46 @@ class Game {
     }
 
     scores.sort();
+  }
+
+  // Functionality for peer communication using WebSocket
+
+  configureWebSocket() {
+    const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.displayMsg("system", "game", "connected");
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg("system", "game", "disconnected");
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === GameEndEvent) {
+        this.displayMsg("player", msg.from, `scored ${msg.value.score}`);
+      } else if (msg.type === GameStartEvent) {
+        this.displayMsg("player", msg.from, `started a new game`);
+      }
+    };
+
+    // Let other players know a new game has started
+    this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
+  }
+
+  displayMsg(cls, from, msg) {
+    const chatText = document.querySelector("#player-messages");
+    chatText.innerHTML =
+      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` +
+      chatText.innerHTML;
+  }
+
+  broadcastEvent(from, type, value) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+    };
+    this.socket.send(JSON.stringify(event));
   }
 }
 
