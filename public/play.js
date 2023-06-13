@@ -179,8 +179,41 @@ class Game {
 
     this.submitButton = document.querySelector("#submit");
     this.submitButton.disabled = true;
+
+    window.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.defaultPrevented) {
+          return; // Should do nothing if the default action has been cancelled
+        }
+
+        let handled = false;
+        if (event.key !== undefined) {
+          // Handle the event with KeyboardEvent.key
+          if (event.key === "Enter") {
+            this.submitButton.click();
+            handled = true;
+          }
+        } else if (event.keyCode !== undefined) {
+          // Handle the event with KeyboardEvent.keyCode
+          if (event.keyCode === 13) {
+            this.submitButton.click();
+            handled = true;
+          }
+        }
+
+        if (handled) {
+          // Suppress "double action" if event handled
+          event.preventDefault();
+        } else {
+        }
+      },
+      true
+    );
+
     const goalTextEl = document.querySelector("#goal-text");
     const opponentName = this.getOpponentName();
+
     if (opponentName) {
       this.playerNumber = 1;
       goalTextEl.textContent = "Goal: solve the equation";
