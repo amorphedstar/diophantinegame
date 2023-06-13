@@ -3,7 +3,11 @@ const initialEquation = {"operator":"*","args":[{"operator":"+","args":[{"operat
 
 // Event messages
 const GameEndEvent = "gameEnd";
+const GameHostEvent = "gameHost";
 const GameStartEvent = "gameStart";
+const GameTerminateEvent = "gameTerminate";
+const GameTurnEvent = "gameTurn";
+const GameErrorEvent = "gameError";
 
 // type Expression = bigint | string | { operator: String, args: Expression[] };
 
@@ -138,6 +142,21 @@ function delay(milliseconds) {
   });
 }
 
+// Make the function wait until the connection is made...
+function waitForSocketConnection(socket, callback) {
+  setTimeout(function () {
+    if (socket.readyState === 1) {
+      // console.log("Connection is made")
+      if (callback != null) {
+        callback();
+      }
+    } else {
+      // console.log("wait for connection...")
+      waitForSocketConnection(socket, callback);
+    }
+  }, 5); // wait 5 milisecond for the connection...
+}
+
 class Game {
   playerNumber;
   variables;
@@ -147,17 +166,19 @@ class Game {
   socket;
 
   constructor() {
+    this.configureWebSocket();
+
     this.variables = [...Array(26)].map(
       (_, idx) => `${idx % 2 ? "x" : "a"}_{${(idx >> 1) + 1}}`
     );
     this.turnNumber = 0;
     this.equation = normalizeIntegers(initialEquation);
-    this.updateEquation();
 
     const playerNameEl = document.querySelector("#player-name");
     playerNameEl.textContent = this.getPlayerName();
 
     this.submitButton = document.querySelector("#submit");
+    this.submitButton.disabled = true;
     const goalTextEl = document.querySelector("#goal-text");
     const opponentName = this.getOpponentName();
     if (opponentName) {
@@ -165,19 +186,29 @@ class Game {
       goalTextEl.textContent = "Goal: solve the equation";
       const opponentNameEl = document.querySelector("#opponent-name");
       opponentNameEl.textContent = opponentName;
-      this.waitForOpponent();
+      this.broadcastEvent(this.getPlayerName(), GameStartEvent, {
+        hostName: opponentName,
+      });
+      this.displayMsg("player", opponentName, `goes first`);
     } else {
       this.playerNumber = 0;
       goalTextEl.textContent = "Goal: prevent a solution to";
-      this.waitForJoin();
+      this.broadcastEvent(this.getPlayerName(), GameHostEvent, {});
     }
 
-    this.configureWebSocket();
+    this.updateEquation();
   }
 
   updateEquation() {
-    window.UpdateMath("equation", prettify(this.equation));
-    return equation;
+    const color = this.turnNumber % 2 == this.playerNumber ? "blue" : "red";
+    const variable = this.variables[this.turnNumber] ?? "x";
+    window.UpdateMath(
+      "equation",
+      prettify(this.equation).replaceAll(
+        variable,
+        `\\color{${color}}{${variable}}`
+      )
+    );
   }
 
   assignValue(symbol, value, player) {
@@ -211,42 +242,34 @@ class Game {
   setAvailable() {
     const variable = this.variables[this.turnNumber];
     window.UpdateMath("assignment", `${variable}=`);
-    window.UpdateMath(
-      "equation",
-      prettify(this.equation).replaceAll(variable, `\\color{blue}{${variable}}`)
-    );
+    this.updateEquation();
     this.submitButton.disabled = false;
     this.submitButton.onclick = () => {
       const textEl = document.getElementById("assignment-text");
       const text = textEl.value;
       if (!/^\d+$/.test(text)) {
-        alert(`Not an integer!: ${text}`);
+        alert(`Not a nonnegative integer!: ${text}`);
       } else {
         this.assignValue(
           this.variables[this.turnNumber],
           BigInt(text),
           this.getPlayerName()
         );
-        this.updateEquation();
         this.turnNumber++;
+        this.updateEquation();
 
-        if (this.turnNumber < this.variables.length) {
-          this.waitForOpponent();
-        } else {
+        if (this.turnNumber == this.variables.length) {
           this.finishGame();
         }
+        this.submitButton.disabled = true;
+        this.broadcastEvent(this.getPlayerName(), GameTurnEvent, {
+          value: text,
+        });
       }
     };
   }
 
-  async waitForJoin() {
-    await fetch("/api/game", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name: this.getPlayerName() }),
-    });
-    await delay(3000);
-    const opponentName = "Eich";
+  async onOpponentJoin({ from: opponentName }) {
     localStorage.setItem("opponentName", opponentName);
     const opponentNameEl = document.querySelector("#opponent-name");
     opponentNameEl.textContent = opponentName;
@@ -257,11 +280,7 @@ class Game {
     this.setAvailable();
   }
 
-  async waitForOpponent() {
-    this.submitButton.disabled = true;
-    const value = await fetch(
-      "https://www.random.org/integers/?num=1&min=1&max=1000&col=1&base=10&format=plain&rnd=new"
-    ).then((res) => res.json());
+  async onOpponentSelection(value) {
     this.assignValue(
       this.variables[this.turnNumber],
       BigInt(value),
@@ -302,7 +321,7 @@ class Game {
       });
 
       // Let other players know the game has concluded
-      this.broadcastEvent(userName, GameEndEvent, newScore);
+      this.broadcastEvent(userName, GameEndEvent, { win });
 
       // Store what the service gave us as the high scores
       const scores = await response.json();
@@ -349,14 +368,21 @@ class Game {
     this.socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === GameEndEvent) {
-        this.displayMsg("player", msg.from, `scored ${msg.value.score}`);
+        this.displayMsg(
+          "player",
+          msg.from,
+          `${msg.value.win ? "won" : "lost"}`
+        );
       } else if (msg.type === GameStartEvent) {
-        this.displayMsg("player", msg.from, `started a new game`);
+        this.onOpponentJoin(msg);
+      } else if (msg.type === GameTurnEvent) {
+        this.onOpponentSelection(msg.value.value);
+      } else if (msg.type === GameTerminateEvent) {
+        this.displayMsg("player", msg.from, `left the game`);
+      } else if (msg.type === GameErrorEvent) {
+        alert(`Error: ${msg.value.message}`);
       }
     };
-
-    // Let other players know a new game has started
-    this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
   }
 
   displayMsg(cls, from, msg) {
@@ -367,12 +393,10 @@ class Game {
   }
 
   broadcastEvent(from, type, value) {
-    const event = {
-      from: from,
-      type: type,
-      value: value,
-    };
-    this.socket.send(JSON.stringify(event));
+    const event = { from, type, value };
+    waitForSocketConnection(this.socket, () => {
+      this.socket.send(JSON.stringify(event));
+    });
   }
 }
 

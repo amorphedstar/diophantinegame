@@ -6,7 +6,7 @@ const config = require("./dbConfig.json");
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db("startup");
-const gameCollection = db.collection("game");
+// const gameCollection = db.collection("game");
 const scoreCollection = db.collection("score");
 const userCollection = db.collection("user");
 
@@ -71,21 +71,21 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-async function addGame({ name }) {
-  return gameCollection.replaceOne({ name }, { name }, { upsert: true });
-}
+// async function addGame({ name }) {
+//   return gameCollection.replaceOne({ name }, { name }, { upsert: true });
+// }
 
-async function closeGame({ name }) {
-  return gameCollection.deleteOne({ name });
-}
+// async function closeGame({ name }) {
+//   return gameCollection.deleteOne({ name });
+// }
 
-async function getGames() {
-  const options = {
-    limit: 10,
-  };
-  const cursor = await gameCollection.find({}, options);
-  return cursor.toArray();
-}
+// async function getGames() {
+//   const options = {
+//     limit: 10,
+//   };
+//   const cursor = await gameCollection.find({}, options);
+//   return cursor.toArray();
+// }
 
 module.exports = {
   getUser,
@@ -93,7 +93,7 @@ module.exports = {
   createUser,
   addScore,
   getHighScores,
-  addGame,
-  closeGame,
-  getGames,
+  // addGame,
+  // closeGame,
+  // getGames,
 };

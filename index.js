@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const app = express();
 const DB = require("./database.js");
-const { peerProxy } = require("./peerProxy.js");
+const { peerProxy, getGames } = require("./peerProxy.js");
 
 const authCookieName = "token";
 
@@ -102,39 +102,39 @@ secureApiRouter.post("/score", async (req, res) => {
   if (verbose) {
     console.log("POST /api/score", req.body);
   }
-  const score = await DB.addScore(req.body);
-  res.send(score);
+  const scores = await DB.addScore(req.body);
+  res.send(scores);
 });
 
 // GetGames
-secureApiRouter.get("/games", async (_req, res) => {
+secureApiRouter.get("/games", (_req, res) => {
   if (verbose) {
     console.log("GET /api/games");
   }
-  const games = await DB.getGames();
+  const games = getGames();
   res.send(games);
 });
 
-// AddGame
-secureApiRouter.post("/game", async (req, res) => {
-  if (verbose) {
-    console.log("POST /api/game", req.body);
-  }
-  const game = await DB.addGame(req.body);
-  res.send(game);
-});
+// // AddGame
+// secureApiRouter.post("/game", async (req, res) => {
+//   if (verbose) {
+//     console.log("POST /api/game", req.body);
+//   }
+//   const game = await DB.addGame(req.body);
+//   res.send(game);
+// });
 
-// NOTE: The following endpoint is not used in the frontend yet
-//       but will be used once there is functionality for
-//       connecting different users in a live game.
-// CloseGame
-secureApiRouter.delete("/game", async (req, res) => {
-  if (verbose) {
-    console.log("DELETE /api/game", req.body);
-  }
-  const game = await DB.closeGame(req.body);
-  res.send(game);
-});
+// // NOTE: The following endpoint is not used in the frontend yet
+// //       but will be used once there is functionality for
+// //       connecting different users in a live game.
+// // CloseGame
+// secureApiRouter.delete("/game", async (req, res) => {
+//   if (verbose) {
+//     console.log("DELETE /api/game", req.body);
+//   }
+//   const game = await DB.closeGame(req.body);
+//   res.send(game);
+// });
 
 // Default error handler
 app.use(function (err, req, res, next) {
