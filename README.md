@@ -115,4 +115,4 @@ For this deliverable I enabled realtime reporting of games from other users.
 - **Backend listens for WebSocket connection** - done!
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
-- **WebSocket data displayed** - Game data displays in realtime
+- **WebSocket data displayed** - Game data displays in realtime and users now play with each other instead of a random number generator
