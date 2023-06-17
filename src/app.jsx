@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { Login } from "./login/login";
-import { Lobby } from "./lobby/lobby";
-import { Play } from "./play/play";
-import { Scores } from "./scores/scores";
-import { About } from "./about/about";
+// import { Lobby } from "./lobby/lobby";
+// import { Play } from "./play/play";
+// import { Scores } from "./scores/scores";
+// import { About } from "./about/about";
 import { AuthState } from "./login/authState";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
@@ -37,11 +37,11 @@ function App() {
                       Lobby
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <NavLink className="nav-link" to="play">
                       Play
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <NavLink className="nav-link" to="scores">
                       Scores
@@ -73,10 +73,10 @@ function App() {
             }
             exact
           />
-          <Route path="/lobby" element={<Lobby userName={userName} />} />
+          {/* <Route path="/lobby" element={<Lobby userName={userName} />} />
           <Route path="/play" element={<Play userName={userName} />} />
           <Route path="/scores" element={<Scores />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
 
