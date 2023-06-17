@@ -3,4 +3,3 @@ dist/
 node_modules/
 dbConfig.json
 package-lock.json
-ssh.sh

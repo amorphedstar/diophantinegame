@@ -18,7 +18,7 @@ Have you ever found yourself reading about mathematical game theory, and wonderi
 
 ### Design
 
-![Mock](diophantine_game_mockup.png)
+![Mock](resources/diophantine_game_mockup.png)
 
 ### Key features
 
