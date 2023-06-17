@@ -1,0 +1,13 @@
+.picture-box {
+  height: calc(250px + 1em);
+  width: fit-content;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  background: rgb(86, 89, 93);
+  border-radius: 5px;
+}
+
+#picture img {
+  width: auto;
+  height: 100%;
+}

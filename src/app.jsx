@@ -4,7 +4,7 @@ import { Login } from "./login/login";
 // import { Lobby } from "./lobby/lobby";
 // import { Play } from "./play/play";
 // import { Scores } from "./scores/scores";
-// import { About } from "./about/about";
+import { About } from "./about/about";
 import { AuthState } from "./login/authState";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
@@ -75,8 +75,8 @@ function App() {
           />
           {/* <Route path="/lobby" element={<Lobby userName={userName} />} />
           <Route path="/play" element={<Play userName={userName} />} />
-          <Route path="/scores" element={<Scores />} />
-          <Route path="/about" element={<About />} /> */}
+          <Route path="/scores" element={<Scores />} /> */}
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
