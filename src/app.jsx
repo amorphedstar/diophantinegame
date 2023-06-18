@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { Login } from "./login/login";
-// import { Lobby } from "./lobby/lobby";
-// import { Play } from "./play/play";
+import { Lobby } from "./lobby/lobby";
+import { Play } from "./play/play";
 import { Scores } from "./scores/scores";
 import { About } from "./about/about";
 import { AuthState } from "./login/authState";
@@ -13,6 +13,7 @@ function App() {
   const [userName, setUserName] = React.useState(
     localStorage.getItem("userName") ?? ""
   );
+  const [opponentName, setOpponentName] = React.useState("");
   const currentAuthState = userName
     ? AuthState.Authenticated
     : AuthState.Unauthenticated;
@@ -73,8 +74,20 @@ function App() {
             }
             exact
           />
-          {/* <Route path="/lobby" element={<Lobby userName={userName} />} />
-          <Route path="/play" element={<Play userName={userName} />} /> */}
+          <Route
+            path="/lobby"
+            element={<Lobby setOpponentName={setOpponentName} />}
+          />
+          <Route
+            path="/play"
+            element={
+              <Play
+                userName={userName}
+                opponentName={opponentName}
+                setOpponentName={setOpponentName}
+              />
+            }
+          />
           <Route path="/scores" element={<Scores />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />

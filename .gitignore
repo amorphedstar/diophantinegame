@@ -1,5 +1,14 @@
-.vscode/
-dist/
+# dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# production
+/build
+/dist
+
+# misc
+.vscode/
 dbConfig.json
+npm-debug.log*
 package-lock.json
