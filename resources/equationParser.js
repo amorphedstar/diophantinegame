@@ -117,3 +117,31 @@ const fs = require("fs");
 fs.writeFileSync("eqn.json", JSON.stringify(merge(parse(masterEquation))));
 
 // fs.writeFileSync("eqn.txt", toTeX(merge(parse(masterEquation))));
+
+
+// debugging equation
+function toObject(arg) {
+  return JSON.parse(
+    JSON.stringify(
+      arg,
+      (key, value) => (typeof value === "bigint" ? value.toString() : value) // return everything else unchanged
+    )
+  );
+}
+
+function normalizeIntegers(expr) {
+  if (typeof expr === "number") {
+    return BigInt(expr);
+  } else if (typeof expr === "string") {
+    if (/^-?\d+$/.test(expr)) {
+      return BigInt(expr);
+    }
+    return expr;
+  } else {
+    const { operator, args } = expr;
+    return {
+      operator,
+      args: args.map(normalizeIntegers),
+    };
+  }
+}
