@@ -1,10 +1,11 @@
+import React from "react";
 import "./about.css";
 
 export function About() {
   return (
-    <main class="container-fluid bg-secondary text-center">
+    <main className="container-fluid bg-secondary text-center">
       <div>
-        <div id="picture" class="picture-box">
+        <div id="picture" className="picture-box">
           <img
             width="400px"
             src="diophantine_game_jones.png"
@@ -21,7 +22,7 @@ export function About() {
           other trying to make it unsatisfiable. J. P. Jones, motivated by the
           theory of Diophantine equations, studied Diophantine games and {}
           <a
-            class="text-dark"
+            className="text-dark"
             href="https://link.springer.com/article/10.1007/BF01769063"
           >
             constructed a game in which one player has a winning strategy which

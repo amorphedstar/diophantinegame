@@ -4,9 +4,10 @@ import { useNavigate } from "react-router";
 
 import "./lobby.css";
 
-export function Lobby({ userName, opponentName, setOpponentName }) {
+export function Lobby({ userName }) {
   const navigate = useNavigate();
   const [opponentList, setOpponentList] = React.useState([]);
+  const [opponentName, setOpponentName] = React.useState("");
 
   React.useEffect(() => {
     // fetch game list from backend
@@ -15,10 +16,15 @@ export function Lobby({ userName, opponentName, setOpponentName }) {
       .then((games) => setOpponentList(games));
   }, []);
 
-  const onClick = () => {
-    localStorage.setItem("opponentName", opponentName);
-    setOpponentName(opponentName);
-    navigate("/play");
+  const onClick = (isHost) => () => {
+    if (isHost) {
+      navigate(`/play/${userName}`);
+    } else {
+      if (!opponentName) return;
+      navigate(`/play/${opponentName}`);
+    }
+    // render MathJax :(
+    location.reload();
   };
 
   return (
@@ -36,24 +42,26 @@ export function Lobby({ userName, opponentName, setOpponentName }) {
         <div>
           <legend>Create or join a game</legend>
 
-          <Button className="button" variant="primary" onClick={onClick}>
+          <Button className="button" variant="primary" onClick={onClick(true)}>
             Host new game
           </Button>
           <Form.Select
             className="form-select"
             value={opponentName}
-            onChange={(e) => setType(e.currentTarget.value)}
+            onChange={(e) => setOpponentName(e.currentTarget.value)}
           >
-            <option>Choose a game</option>
+            <option key={"choose"}>Choose a game</option>
             {opponentList.map(({ name }) => (
-              <option value={name}>{name}</option>
+              <option value={name} key={`option${name}`}>
+                {name}
+              </option>
             ))}
           </Form.Select>
           <Button
             className="button"
             disabled={!opponentName}
             variant="primary"
-            onClick={onClick}
+            onClick={onClick(false)}
           >
             Join game
           </Button>

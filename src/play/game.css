@@ -1,0 +1,13 @@
+.game {
+  position: absolute;
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.assignment-container {
+  margin: 20px;
+}

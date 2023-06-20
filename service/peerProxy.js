@@ -50,12 +50,13 @@ function peerProxy(httpServer) {
         connection.name = name;
         connection.game = hostName;
         try {
-          (games.has(hostName) && games.get(hostName).players.length === 1) ||
-            1 / 0;
+          if (games.get(hostName)?.players?.length !== 1) {
+            throw new Error("Game could not be joined");
+          }
           games.get(hostName).players[0].ws.send(data);
           games.get(hostName).players.push(connection);
         } catch (e) {
-          console.log(e);
+          if (verbose) console.log(e);
           connection.game = undefined;
           connection.ws.send(
             JSON.stringify({
@@ -67,9 +68,9 @@ function peerProxy(httpServer) {
         }
       } else if (msg.type === GameTurnEvent) {
         games.get(connection.game)?.players?.forEach((c) => {
-          if (c.id !== connection.id) {
-            c.ws.send(data);
-          }
+          // if (c.id !== connection.id) {
+          c.ws.send(data);
+          // }
         });
       }
     });
@@ -97,7 +98,8 @@ function peerProxy(httpServer) {
 
     connections.forEach((c, index) => {
       // Kill any connection that didn't respond to the ping last time
-      if (!c.alive || !games.has(c.game)) {
+      if (!c.alive) {
+        // || !games.has(c.game)) {
         deadIndices.push(index);
       }
     });
@@ -125,12 +127,14 @@ function peerProxy(httpServer) {
 }
 
 function getGames() {
+  if (verbose) console.log({ games });
   const gameList = [...games.values()]
     .filter(({ players }) => players.length == 1)
     .map(({ players: [{ id, name }] }) => ({
       id,
       name,
     }));
+  if (verbose) console.log({ gameList });
   return gameList;
 }
 

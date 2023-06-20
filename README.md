@@ -116,3 +116,12 @@ For this deliverable I enabled realtime reporting of games from other users.
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
 - **WebSocket data displayed** - Game data displays in realtime and users now play with each other instead of a random number generator
+
+## React deliverable
+
+For this deliverable I converted the application over to use React.
+
+- **Bundled and transpiled** - done!
+- **Components** - `Login`, `Lobby`, `Play`, `Scores`, and `About` are all components.
+- **Router** - Routing between all components, and particularly from `Lobby` to `Play`.
+- **Hooks** - `Play` uses hooks extensively to propagate game information to all components in real time, and other components display data after asynchronous operations.
